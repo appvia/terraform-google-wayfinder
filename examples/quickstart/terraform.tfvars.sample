@@ -1,0 +1,6 @@
+clusterissuer_email       = "example@appvia.io"
+gcp_project               = "your-gcp-project"
+wayfinder_instance_id     = "your-wayfinder-instance-id"
+wayfinder_licence_key     = "your-wayfinder-licence-key"
+wayfinder_domain_name_ui  = "portal.example.com"
+wayfinder_domain_name_api = "api.example.com"
