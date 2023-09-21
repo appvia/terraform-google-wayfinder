@@ -1,0 +1,26 @@
+terraform {
+  required_version = ">= 1.5"
+
+  required_providers {
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.5"
+    }
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 4.82.0"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = ">= 2.9.0"
+    }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.14.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.23.0"
+    }
+  }
+}
