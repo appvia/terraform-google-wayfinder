@@ -1,12 +1,12 @@
 provider "google" {
   project = var.gcp_project
-  region  = var.region
+  region  = var.gcp_region
 }
 
 provider "helm" {
   kubernetes {
     cluster_ca_certificate = base64decode(module.wayfinder.cluster_ca_certificate)
-    host                   = "https://${module.wayfinder.cluster_endpoint}"
+    host                   = module.wayfinder.cluster_endpoint
 
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
@@ -17,7 +17,7 @@ provider "helm" {
 
 provider "kubectl" {
   cluster_ca_certificate = base64decode(module.wayfinder.cluster_ca_certificate)
-  host                   = "https://${module.wayfinder.cluster_endpoint}"
+  host                   = module.wayfinder.cluster_endpoint
   load_config_file       = false
 
   exec {
@@ -28,7 +28,7 @@ provider "kubectl" {
 
 provider "kubernetes" {
   cluster_ca_certificate = base64decode(module.wayfinder.cluster_ca_certificate)
-  host                   = "https://${module.wayfinder.cluster_endpoint}"
+  host                   = module.wayfinder.cluster_endpoint
 
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"

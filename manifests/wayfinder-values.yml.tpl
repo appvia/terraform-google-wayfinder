@@ -1,4 +1,6 @@
 api:
+  gcp:
+    wayfinderIamIdentity: "${wayfinder_iam_identity}"
   enabled: true
   endpoint:
     url: "https://${api_hostname}"
@@ -10,6 +12,7 @@ api:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: '16k'
     namespace: "ingress-nginx"
     className: "nginx"
   wayfinderInstanceIdentifier: "${wayfinder_instance_identifier}"
@@ -19,6 +22,7 @@ mysql:
   pvc:
     storageClass: "${storage_class}"
 ui:
+  cloudOrder: "['gcp','aws','azure']"
   enabled: true
   endpoint:
     url: "https://${ui_hostname}"

@@ -1,13 +1,5 @@
-locals {
-  wayfinder_instance_id = var.wayfinder_instance_id != "" ? var.wayfinder_instance_id : substr(md5(format("gcp-%s-%s-%s", var.gcp_project, var.gcp_region, var.environment)), 0, 12)
-}
-
-resource "random_id" "wayfinder_sa_suffix" {
-  byte_length = 4
-}
-
 resource "google_service_account" "wayfinder" {
-  account_id   = "wf-admin-${random_id.wayfinder_sa_suffix.hex}"
+  account_id   = "wf-admin-${local.service_account_suffix}"
   display_name = "Wayfinder admin service account"
 }
 
@@ -17,6 +9,24 @@ resource "google_service_account_iam_binding" "wayfinder_workload_identity_user"
   members = [
     "serviceAccount:${var.gcp_project}.svc.id.goog[wayfinder/wayfinder-admin]"
   ]
+}
+
+resource "google_project_iam_custom_role" "wayfinder_cloudinfo" {
+  role_id     = "wayfinder.cloudInfo.${local.service_account_suffix}.${random_id.random_suffix.hex}"
+  project     = var.gcp_project
+  title       = "Wayfinder Cloud Info"
+  description = "Retrieve pricing information for GCP cloud resources"
+  permissions = [
+    "compute.machineTypes.list",
+    "compute.regions.list",
+    "resourcemanager.projects.get",
+  ]
+}
+
+resource "google_project_iam_member" "wayfinder_cloudinfo" {
+  project = var.gcp_project
+  role    = google_project_iam_custom_role.wayfinder_cloudinfo.id
+  member  = "serviceAccount:${google_service_account.wayfinder.email}"
 }
 
 resource "kubectl_manifest" "storageclass" {
@@ -100,7 +110,7 @@ resource "helm_release" "wayfinder" {
 
   depends_on = [
     helm_release.certmanager,
-    # helm_release.external-dns,
+    helm_release.external-dns,
     helm_release.ingress,
     kubectl_manifest.certmanager_clusterissuer,
     kubectl_manifest.storageclass,
@@ -125,7 +135,8 @@ resource "helm_release" "wayfinder" {
       enable_localadmin_user        = var.create_localadmin_user
       storage_class                 = "standard-rwo-encrypted"
       ui_hostname                   = var.wayfinder_domain_name_ui
-      wayfinder_instance_identifier = local.wayfinder_instance_id
+      wayfinder_iam_identity        = google_service_account.wayfinder.email
+      wayfinder_instance_identifier = var.wayfinder_instance_id
     })
   ]
 

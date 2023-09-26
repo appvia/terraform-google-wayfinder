@@ -1,9 +1,5 @@
-resource "random_id" "external_dns_sa_suffix" {
-  byte_length = 4
-}
-
 resource "google_service_account" "external_dns" {
-  account_id   = "wf-external-dns-${random_id.external_dns_sa_suffix.hex}"
+  account_id   = "wf-external-dns-${local.service_account_suffix}"
   display_name = "Wayfinder external-dns"
 }
 

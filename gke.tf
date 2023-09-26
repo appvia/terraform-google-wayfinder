@@ -4,37 +4,21 @@ resource "google_service_account" "gke_service_account" {
 }
 
 resource "google_container_cluster" "gke" {
-  name                     = local.name
-  location                 = var.gcp_region
-  resource_labels          = local.labels
+  name = local.name
+
   initial_node_count       = 1
+  location                 = var.gcp_region
+  min_master_version       = "1.26"
+  network                  = var.gcp_network_name
+  node_version             = "1.26"
   remove_default_node_pool = true
+  resource_labels          = local.labels
+  subnetwork               = var.gcp_subnetwork_name
 
-  network    = var.gcp_network_name
-  subnetwork = var.gcp_subnetwork_name
-
-  ip_allocation_policy {
-    cluster_secondary_range_name  = var.pods_subnetwork_range_name
-    services_secondary_range_name = var.services_subnetwork_range_name
-  }
-
-  master_authorized_networks_config {
-    gcp_public_cidrs_access_enabled = var.disable_internet_access ? false : true
-
-    dynamic "cidr_blocks" {
-      for_each = var.cluster_endpoint_public_access_cidrs
-      content {
-        cidr_block = cidr_blocks.value
-      }
+  addons_config {
+    network_policy_config {
+      disabled = false
     }
-  }
-
-  private_cluster_config {
-    enable_private_endpoint = var.disable_internet_access
-  }
-
-  workload_identity_config {
-    workload_pool = "${var.gcp_project}.svc.id.goog"
   }
 
   cluster_autoscaling {
@@ -51,6 +35,53 @@ resource "google_container_cluster" "gke" {
       maximum       = 16
     }
   }
+
+  ip_allocation_policy {
+    cluster_secondary_range_name  = var.pods_subnetwork_range_name
+    services_secondary_range_name = var.services_subnetwork_range_name
+  }
+
+  logging_config {
+    enable_components = ["SYSTEM_COMPONENTS", "WORKLOADS"]
+  }
+
+  maintenance_policy {
+    daily_maintenance_window {
+      start_time = "03:00"
+    }
+  }
+
+  master_authorized_networks_config {
+    gcp_public_cidrs_access_enabled = var.disable_internet_access ? false : true
+
+    dynamic "cidr_blocks" {
+      for_each = var.cluster_endpoint_public_access_cidrs
+      content {
+        cidr_block = cidr_blocks.value
+      }
+    }
+  }
+
+  monitoring_config {
+    enable_components = ["SYSTEM_COMPONENTS"]
+  }
+
+  network_policy {
+    enabled  = true
+    provider = "CALICO"
+  }
+
+  private_cluster_config {
+    enable_private_endpoint = var.disable_internet_access
+  }
+
+  release_channel {
+    channel = var.gke_release_channel
+  }
+
+  workload_identity_config {
+    workload_pool = "${var.gcp_project}.svc.id.goog"
+  }
 }
 
 resource "google_container_node_pool" "nodes" {
@@ -58,6 +89,11 @@ resource "google_container_node_pool" "nodes" {
   location   = var.gcp_region
   cluster    = google_container_cluster.gke.name
   node_count = var.gke_nodes_minimum_size
+
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
 
   node_config {
     workload_metadata_config {

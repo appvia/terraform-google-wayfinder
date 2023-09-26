@@ -1,9 +1,5 @@
-resource "random_id" "cert_manager_sa_suffix" {
-  byte_length = 4
-}
-
 resource "google_service_account" "cert_manager" {
-  account_id   = "wf-cert-manager-${random_id.cert_manager_sa_suffix.hex}"
+  account_id   = "wf-cert-manager-${local.service_account_suffix}"
   display_name = "Wayfinder cert-manager"
 }
 
