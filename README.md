@@ -1,4 +1,3 @@
-# terraform-gcp-wayfinder
 <!-- BEGIN_TF_DOCS -->
 # Terraform Module: Wayfinder on GCP
 
