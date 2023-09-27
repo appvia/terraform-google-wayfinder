@@ -65,6 +65,7 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 | <a name="input_clusterissuer_email"></a> [clusterissuer\_email](#input\_clusterissuer\_email) | The email address to use for the cert-manager cluster issuer. | `string` | n/a | yes |
 | <a name="input_create_localadmin_user"></a> [create\_localadmin\_user](#input\_create\_localadmin\_user) | Whether to create a localadmin user for access to the Wayfinder Portal and API. | `bool` | `true` | no |
 | <a name="input_disable_internet_access"></a> [disable\_internet\_access](#input\_disable\_internet\_access) | Whether to disable internet access for GKE and the Wayfinder ingress controller. | `bool` | `false` | no |
+| <a name="input_disable_local_login"></a> [disable\_local\_login](#input\_disable\_local\_login) | Whether to disable local login for Wayfinder. Note: An IDP must be configured within Wayfinder, otherwise you will not be able to log in. | `bool` | `false` | no |
 | <a name="input_enable_k8s_resources"></a> [enable\_k8s\_resources](#input\_enable\_k8s\_resources) | Whether to enable the creation of Kubernetes resources for Wayfinder (helm and kubectl manifest deployments). | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name we are provisioning. | `string` | `"production"` | no |
 | <a name="input_gcp_network_name"></a> [gcp\_network\_name](#input\_gcp\_network\_name) | Google Compute Engine network to which the cluster is connected. | `string` | n/a | yes |
@@ -72,7 +73,7 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 | <a name="input_gcp_region"></a> [gcp\_region](#input\_gcp\_region) | Google Cloud region. | `string` | n/a | yes |
 | <a name="input_gcp_subnetwork_name"></a> [gcp\_subnetwork\_name](#input\_gcp\_subnetwork\_name) | The name or self\_link of the Google Compute Engine subnetwork in which the cluster's instances are launched. | `string` | n/a | yes |
 | <a name="input_gke_nodes_machine_type"></a> [gke\_nodes\_machine\_type](#input\_gke\_nodes\_machine\_type) | The instance types to use for the GKE managed node pool. | `string` | `"e2-medium"` | no |
-| <a name="input_gke_nodes_minimum_size"></a> [gke\_nodes\_minimum\_size](#input\_gke\_nodes\_minimum\_size) | The minimum size to use for the GKE managed node pool. | `number` | `3` | no |
+| <a name="input_gke_nodes_minimum_size"></a> [gke\_nodes\_minimum\_size](#input\_gke\_nodes\_minimum\_size) | The minimum size to use for the GKE managed node pool. | `number` | `2` | no |
 | <a name="input_gke_release_channel"></a> [gke\_release\_channel](#input\_gke\_release\_channel) | The release channel to use for GKE. | `string` | `"UNSPECIFIED"` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | A map of labels to add to all resources created. | `map(string)` | `{}` | no |
 | <a name="input_pods_subnetwork_range_name"></a> [pods\_subnetwork\_range\_name](#input\_pods\_subnetwork\_range\_name) | The name of the existing secondary range in the cluster's subnetwork to use for pod IP addresses. | `string` | n/a | yes |

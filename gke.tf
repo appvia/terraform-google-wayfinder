@@ -10,7 +10,6 @@ resource "google_container_cluster" "gke" {
   location                 = var.gcp_region
   min_master_version       = "1.26"
   network                  = var.gcp_network_name
-  node_version             = "1.26"
   remove_default_node_pool = true
   resource_labels          = local.labels
   subnetwork               = var.gcp_subnetwork_name
@@ -85,10 +84,15 @@ resource "google_container_cluster" "gke" {
 }
 
 resource "google_container_node_pool" "nodes" {
-  name       = "wayfinder"
-  location   = var.gcp_region
-  cluster    = google_container_cluster.gke.name
-  node_count = var.gke_nodes_minimum_size
+  name     = "wayfinder"
+  location = var.gcp_region
+  cluster  = google_container_cluster.gke.name
+
+  autoscaling {
+    total_min_node_count = var.gke_nodes_minimum_size
+    total_max_node_count = 10
+    location_policy      = "ANY"
+  }
 
   management {
     auto_repair  = true

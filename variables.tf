@@ -1,3 +1,44 @@
+variable "clusterissuer_email" {
+  description = "The email address to use for the cert-manager cluster issuer."
+  type        = string
+}
+
+variable "cluster_endpoint_public_access_cidrs" {
+  description = "List of CIDR blocks which can access the GKE API master endpoint."
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "create_localadmin_user" {
+  description = "Whether to create a localadmin user for access to the Wayfinder Portal and API."
+  type        = bool
+  default     = true
+}
+
+variable "disable_internet_access" {
+  description = "Whether to disable internet access for GKE and the Wayfinder ingress controller."
+  type        = bool
+  default     = false
+}
+
+variable "disable_local_login" {
+  description = "Whether to disable local login for Wayfinder. Note: An IDP must be configured within Wayfinder, otherwise you will not be able to log in."
+  type        = bool
+  default     = false
+}
+
+variable "enable_k8s_resources" {
+  description = "Whether to enable the creation of Kubernetes resources for Wayfinder (helm and kubectl manifest deployments)."
+  type        = bool
+  default     = true
+}
+
+variable "environment" {
+  description = "The environment name we are provisioning."
+  type        = string
+  default     = "production"
+}
+
 variable "gcp_project" {
   description = "Google Cloud Platform Project ID."
   type        = string
@@ -18,46 +59,6 @@ variable "gcp_subnetwork_name" {
   type        = string
 }
 
-variable "pods_subnetwork_range_name" {
-  description = "The name of the existing secondary range in the cluster's subnetwork to use for pod IP addresses."
-  type        = string
-}
-
-variable "services_subnetwork_range_name" {
-  description = "The name of the existing secondary range in the cluster's subnetwork to use for services IP addresses."
-  type        = string
-}
-
-variable "clusterissuer_email" {
-  description = "The email address to use for the cert-manager cluster issuer."
-  type        = string
-}
-
-variable "cluster_endpoint_public_access_cidrs" {
-  description = "List of CIDR blocks which can access the GKE API master endpoint."
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
-}
-
-
-variable "create_localadmin_user" {
-  description = "Whether to create a localadmin user for access to the Wayfinder Portal and API."
-  type        = bool
-  default     = true
-}
-
-variable "enable_k8s_resources" {
-  description = "Whether to enable the creation of Kubernetes resources for Wayfinder (helm and kubectl manifest deployments)."
-  type        = bool
-  default     = true
-}
-
-variable "disable_internet_access" {
-  description = "Whether to disable internet access for GKE and the Wayfinder ingress controller."
-  type        = bool
-  default     = false
-}
-
 variable "gke_nodes_machine_type" {
   description = "The instance types to use for the GKE managed node pool."
   type        = string
@@ -67,7 +68,7 @@ variable "gke_nodes_machine_type" {
 variable "gke_nodes_minimum_size" {
   description = "The minimum size to use for the GKE managed node pool."
   type        = number
-  default     = 3
+  default     = 2
 }
 
 variable "gke_release_channel" {
@@ -76,16 +77,20 @@ variable "gke_release_channel" {
   default     = "UNSPECIFIED"
 }
 
-variable "environment" {
-  description = "The environment name we are provisioning."
-  type        = string
-  default     = "production"
-}
-
 variable "labels" {
   description = "A map of labels to add to all resources created."
   type        = map(string)
   default     = {}
+}
+
+variable "pods_subnetwork_range_name" {
+  description = "The name of the existing secondary range in the cluster's subnetwork to use for pod IP addresses."
+  type        = string
+}
+
+variable "services_subnetwork_range_name" {
+  description = "The name of the existing secondary range in the cluster's subnetwork to use for services IP addresses."
+  type        = string
 }
 
 variable "wayfinder_domain_name_api" {
