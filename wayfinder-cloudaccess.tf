@@ -12,7 +12,7 @@ resource "google_project_iam_custom_role" "wayfinder_cloudinfo" {
 }
 
 resource "google_project_iam_member" "wayfinder_cloudinfo" {
-  count       = var.enable_wf_cloudaccess ? 1 : 0
+  count   = var.enable_wf_cloudaccess ? 1 : 0
   project = var.gcp_project
   role    = google_project_iam_custom_role.wayfinder_cloudinfo[0].id
   member  = "serviceAccount:${google_service_account.wayfinder.email}"
