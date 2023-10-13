@@ -1,12 +1,10 @@
-apiVersion: cloudaccess.appvia.io/v2beta1
+apiVersion: cloudaccess.appvia.io/v2beta2
 kind: CloudIdentity
 metadata:
   name: ${name}
   namespace: ws-admin
 spec:
   cloud: gcp
-  credentialsUpdated: "2023-01-01T00:00:00Z"
-  implicitIdentity: true
-  implicitIdentityID: ${implicit_identity_id}
-  name: ${description}
-  secretRef: {}
+  type: GCPWorkloadIdentity
+  gcp:
+    serviceAccount: ${implicit_identity_id}

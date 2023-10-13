@@ -1,6 +1,4 @@
 api:
-  gcp:
-    wayfinderIamIdentity: "${wayfinder_iam_identity}"
   enabled: true
   endpoint:
     url: "https://${api_hostname}"
@@ -16,7 +14,6 @@ api:
     namespace: "ingress-nginx"
     className: "nginx"
   wayfinderInstanceIdentifier: "${wayfinder_instance_identifier}"
-  wfManagedWfCluster: true
 disableLocalLogin: ${disable_local_login}
 enableLocalAdminUser: ${enable_localadmin_user}
 mysql:
@@ -37,3 +34,6 @@ ui:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     namespace: "ingress-nginx"
     className: "nginx"
+workloadIdentity:
+  gcp:
+    serviceAccount: "${wayfinder_iam_identity}"
