@@ -1,5 +1,5 @@
 locals {
-  resource_prefix = "wf-"
+  resource_prefix = "wf"
   resource_suffix = var.resource_suffix
 
   # populate the account ID and role name if from the irsa role arn using split
