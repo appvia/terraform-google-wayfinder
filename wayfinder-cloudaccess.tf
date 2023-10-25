@@ -1,21 +1,13 @@
-resource "google_project_iam_custom_role" "wayfinder_cloudinfo" {
-  count       = var.enable_wf_cloudaccess ? 1 : 0
-  role_id     = "wayfinder.cloudInfo.${local.service_account_suffix}.${random_id.random_suffix.hex}"
-  project     = var.gcp_project
-  title       = "Wayfinder Cloud Info"
-  description = "Retrieve pricing information for GCP cloud resources"
-  permissions = [
-    "compute.machineTypes.list",
-    "compute.regions.list",
-    "resourcemanager.projects.get",
-  ]
-}
+module "wayfinder_cloudaccess" {
+  count  = var.enable_wf_cloudaccess ? 1 : 0
+  source = "./modules/cloudaccess"
 
-resource "google_project_iam_member" "wayfinder_cloudinfo" {
-  count   = var.enable_wf_cloudaccess ? 1 : 0
-  project = var.gcp_project
-  role    = google_project_iam_custom_role.wayfinder_cloudinfo[0].id
-  member  = "serviceAccount:${google_service_account.wayfinder.email}"
+  resource_suffix                        = var.wayfinder_instance_id
+  wayfinder_identity_gcp_service_account = google_service_account.wayfinder.email
+  enable_cluster_manager                 = false
+  enable_dns_zone_manager                = true
+  enable_network_manager                 = false
+  enable_cloud_info                      = true
 }
 
 resource "kubectl_manifest" "wayfinder_cloud_identity_main" {
@@ -26,5 +18,43 @@ resource "kubectl_manifest" "wayfinder_cloud_identity_main" {
     name                 = "cloudidentity-gcp"
     description          = "Cloud managed identity"
     implicit_identity_id = google_service_account.wayfinder.email
+  })
+}
+
+resource "kubectl_manifest" "wayfinder_gcp_cloudinfo_cloudaccessconfig" {
+  count = var.enable_k8s_resources && var.enable_wf_cloudaccess ? 1 : 0
+
+  depends_on = [
+    helm_release.wayfinder,
+    kubectl_manifest.wayfinder_cloud_identity_main,
+  ]
+
+  yaml_body = templatefile("${path.module}/manifests/wayfinder-gcp-cloudaccessconfig.yml.tpl", {
+    project_id          = var.gcp_project
+    description         = "Used for cost data retrieval in order to provide infrastructure cost estimates."
+    identity            = "cloudidentity-gcp"
+    name                = "gcp-cloudinfo"
+    permission          = "CloudInfo"
+    gcp_service_account = module.wayfinder_cloudaccess[0].cloud_info_service_account
+    type                = "CostEstimates"
+  })
+}
+
+resource "kubectl_manifest" "wayfinder_gcp_dnszonemanager_cloudaccessconfig" {
+  count = var.enable_k8s_resources && var.enable_wf_cloudaccess ? 1 : 0
+
+  depends_on = [
+    helm_release.wayfinder,
+    kubectl_manifest.wayfinder_cloud_identity_main,
+  ]
+
+  yaml_body = templatefile("${path.module}/manifests/wayfinder-gcp-cloudaccessconfig.yml.tpl", {
+    project_id          = var.gcp_project
+    description         = "Used for managing a top-level domain, so that Wayfinder can create sub domains within it that are delegated to workspace clusters."
+    identity            = "cloudidentity-gcp"
+    name                = "gcp-dnsmanagement"
+    permission          = "DNSZoneManager"
+    gcp_service_account = module.wayfinder_cloudaccess[0].dns_zone_manager_service_account
+    type                = "DNSZoneManagement"
   })
 }

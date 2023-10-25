@@ -14,7 +14,7 @@ resource "google_project_iam_member" "clustermanager" {
 }
 
 resource "google_service_account_iam_member" "clustermanager" {
-  count = var.enable_cluster_manager && (var.wayfinder_identity_gcp_service_account != "") ? 1 : 0
+  count = var.enable_cluster_manager && (var.from_gcp) ? 1 : 0
 
   service_account_id = google_service_account.clustermanager[0].name
   role               = "roles/iam.serviceAccountTokenCreator"
@@ -22,7 +22,7 @@ resource "google_service_account_iam_member" "clustermanager" {
 }
 
 resource "google_service_account_iam_member" "clustermanagerfederated" {
-  count = var.enable_cluster_manager && (local.create_aws_trust || local.create_azure_trust) ? 1 : 0
+  count = var.enable_cluster_manager && (var.from_aws || var.from_azure) ? 1 : 0
 
   service_account_id = google_service_account.clustermanager[0].name
   role               = "roles/iam.serviceAccountTokenCreator"

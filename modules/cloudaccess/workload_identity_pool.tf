@@ -1,5 +1,5 @@
 resource "google_iam_workload_identity_pool" "federated" {
-  count = (local.create_aws_trust || local.create_azure_trust) ? 1 : 0
+  count = (var.from_aws || var.from_azure) ? 1 : 0
 
   workload_identity_pool_id = "${local.resource_prefix}pool${local.resource_suffix}"
   display_name              = "Wayfinder CloudIdentity trust"
@@ -8,7 +8,7 @@ resource "google_iam_workload_identity_pool" "federated" {
 }
 
 resource "google_iam_workload_identity_pool_provider" "aws_federated" {
-  count = local.create_aws_trust ? 1 : 0
+  count = var.from_aws ? 1 : 0
 
   workload_identity_pool_id          = google_iam_workload_identity_pool.federated[0].workload_identity_pool_id
   workload_identity_pool_provider_id = "${local.resource_prefix}aws${local.resource_suffix}"
@@ -27,7 +27,7 @@ resource "google_iam_workload_identity_pool_provider" "aws_federated" {
 }
 
 resource "google_iam_workload_identity_pool_provider" "azure_federated" {
-  count = local.create_azure_trust ? 1 : 0
+  count = var.from_azure ? 1 : 0
 
   workload_identity_pool_id          = google_iam_workload_identity_pool.federated[0].workload_identity_pool_id
   workload_identity_pool_provider_id = "${local.resource_prefix}azure${local.resource_suffix}"
