@@ -2,7 +2,6 @@ module "wayfinder_cloudaccess" {
   source = "github.com/appvia/terraform-google-wayfinder//modules/cloudaccess"
 
   resource_suffix = var.resource_suffix
-  region          = var.region
 
   wayfinder_identity_gcp_service_account = var.wayfinder_identity_gcp_service_account
   wayfinder_identity_aws_role_arn        = var.wayfinder_identity_aws_role_arn
