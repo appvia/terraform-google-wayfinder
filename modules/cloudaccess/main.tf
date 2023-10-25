@@ -5,9 +5,6 @@ locals {
   # populate the account ID and role name if from the irsa role arn using split
   aws_account_id = var.from_aws ? split(":", var.wayfinder_identity_aws_role_arn)[4] : ""
   aws_role_name  = var.from_aws ? split("role/", var.wayfinder_identity_aws_role_arn)[1] : ""
-
-  # create_aws_trust   = var.wayfinder_identity_aws_role_arn != "" ? true : false
-  # create_azure_trust = var.wayfinder_identity_azure_client_id != "" ? true : false
 }
 
 data "google_project" "project" {}
