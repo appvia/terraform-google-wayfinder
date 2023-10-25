@@ -40,7 +40,7 @@ resource "google_iam_workload_identity_pool_provider" "azure_federated" {
   }
   oidc {
     issuer_uri        = "https://sts.windows.net/${var.wayfinder_identity_azure_tenant_id}/"
-    allowed_audiences = ["${var.wayfinder_identity_azure_client_id}"]
+    allowed_audiences = [var.wayfinder_identity_azure_client_id]
   }
 
   lifecycle {
