@@ -11,6 +11,12 @@ resource "google_service_account_iam_binding" "wayfinder_workload_identity_user"
   ]
 }
 
+resource "google_project_iam_member" "wayfinder_workload_identity_user" {
+  project = var.gcp_project
+  role    = "roles/iam.workloadIdentityUser"
+  member  = "serviceAccount:${google_service_account.wayfinder.email}"
+}
+
 resource "kubectl_manifest" "storageclass" {
   count = var.enable_k8s_resources ? 1 : 0
 

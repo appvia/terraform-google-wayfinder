@@ -5,13 +5,13 @@ variable "from_aws" {
 }
 
 variable "from_azure" {
-  default     = false
+  default     = true
   description = "Whether Wayfinder is running on Azure."
   type        = bool
 }
 
 variable "from_gcp" {
-  default     = true
+  default     = false
   description = "Whether Wayfinder is running on GCP."
   type        = bool
 }
