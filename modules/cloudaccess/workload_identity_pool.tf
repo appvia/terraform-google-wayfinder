@@ -45,7 +45,7 @@ resource "google_iam_workload_identity_pool_provider" "azure_federated" {
 
   lifecycle {
     precondition {
-      condition     = var.wayfinder_identity_azure_tenant_id == "" || var.wayfinder_identity_azure_client_id == ""
+      condition     = var.wayfinder_identity_azure_tenant_id != "" || var.wayfinder_identity_azure_client_id != ""
       error_message = "Must specify wayfinder_identity_azure_tenant_id and wayfinder_identity_azure_client_id to enable cross-cloud trust from Azure to AGCPWS"
     }
   }
