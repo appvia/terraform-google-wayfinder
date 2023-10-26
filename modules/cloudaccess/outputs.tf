@@ -1,21 +1,21 @@
 output "cluster_manager_service_account" {
   description = "Email of Cluster Manager service account to use as spec.permissions[].gcpServiceAccount on the ClusterManager permission of your cloud access config"
-  value       = join("", google_service_account.clustermanager.*.email)
+  value       = var.enable_cluster_manager ? google_service_account.clustermanager[0].email : null
 }
 
 output "dns_zone_manager_service_account" {
   description = "Email of DNS Zone Manager service account to use as spec.permissions[].gcpServiceAccount on the DNSZoneManager permission of your cloud access config"
-  value       = join("", google_service_account.dnszonemanager.*.email)
+  value       = var.enable_dns_zone_manager ? google_service_account.dnszonemanager[0].email : null
 }
 
 output "network_manager_service_account" {
   description = "Email of Network Manager service account to use as spec.permissions[].gcpServiceAccount on the NetworkManager permission of your cloud access config"
-  value       = join("", google_service_account.networkmanager.*.email)
+  value       = var.enable_network_manager ? google_service_account.networkmanager[0].email : null
 }
 
 output "cloud_info_service_account" {
   description = "Email of Cloud Info service account to use as spec.permissions[].gcpServiceAccount on the CloudInfo permission of your cloud access config"
-  value       = join("", google_service_account.cloudinfo.*.email)
+  value       = var.enable_cloud_info ? google_service_account.cloudinfo[0].email : null
 }
 
 output "gcp_projectnumber" {
@@ -30,11 +30,14 @@ output "gcp_project" {
 
 output "gcp_workload_identity_pool_id" {
   description = "ID of GCP Workload Identity Pool to use as spec.gcp.workloadIdentityPoolID of your cloud access config when enabling cross-cloud access to GCP from AWS or Azure"
-  value       = join("", google_iam_workload_identity_pool.federated.*.workload_identity_pool_id)
+  value       = (var.from_aws || var.from_azure) ? google_iam_workload_identity_pool.federated[0].workload_identity_pool_id : null
 }
 
-output "gcp_workload_identity_provider_id" {
-  description = "ID of GCP Workload Identity Provider to use as spec.gcp.workloadIdentityProviderID of your cloud access config when enabling cross-cloud access to GCP from AWS or Azure"
-  # only one of these is possible, so we can just join them
-  value = join("", google_iam_workload_identity_pool_provider.aws_federated.*.workload_identity_pool_provider_id, google_iam_workload_identity_pool_provider.azure_federated.*.workload_identity_pool_provider_id)
+output "gcp_workload_identity_provider_id_aws" {
+  description = "ID of GCP Workload Identity Provider to use as spec.gcp.workloadIdentityProviderID of your cloud access config when enabling cross-cloud access to GCP from AWS"
+  value       = var.from_aws ? google_iam_workload_identity_pool_provider.aws_federated[0].workload_identity_pool_provider_id : null
+}
+output "gcp_workload_identity_provider_id_azure" {
+  description = "ID of GCP Workload Identity Provider to use as spec.gcp.workloadIdentityProviderID of your cloud access config when enabling cross-cloud access to GCP from Azure"
+  value       = var.from_azure ? google_iam_workload_identity_pool_provider.azure_federated[0].workload_identity_pool_provider_id : null
 }
