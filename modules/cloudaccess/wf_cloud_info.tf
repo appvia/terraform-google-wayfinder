@@ -26,7 +26,6 @@ resource "google_project_iam_custom_role" "cloudinfo" {
 }
 
 resource "google_service_account_iam_member" "cloudinfo" {
-  # only create when we have a GCP service account and are NOT using a federated access
   count = var.enable_cloud_info && (var.from_gcp) ? 1 : 0
 
   service_account_id = google_service_account.cloudinfo[0].name

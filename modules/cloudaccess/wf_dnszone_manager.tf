@@ -36,7 +36,6 @@ resource "google_project_iam_custom_role" "dnszonemanager" {
 }
 
 resource "google_service_account_iam_member" "dnszonemanager" {
-  # only create when we have a GCP service account and are NOT using a federated access
   count = var.enable_dns_zone_manager && (var.from_gcp) ? 1 : 0
 
   service_account_id = google_service_account.dnszonemanager[0].name
