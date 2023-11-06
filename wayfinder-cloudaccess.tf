@@ -4,10 +4,8 @@ module "wayfinder_cloudaccess" {
 
   resource_suffix                        = var.wayfinder_instance_id
   wayfinder_identity_gcp_service_account = google_service_account.wayfinder.email
-  enable_cluster_manager                 = false
-  enable_dns_zone_manager                = true
-  enable_network_manager                 = false
-  enable_cloud_info                      = true
+  enable_dns_zone_manager                = var.enable_wf_dnszonemanager
+  enable_cloud_info                      = var.enable_wf_costestimates
 }
 
 resource "kubectl_manifest" "wayfinder_cloud_identity_main" {
@@ -22,7 +20,7 @@ resource "kubectl_manifest" "wayfinder_cloud_identity_main" {
 }
 
 resource "kubectl_manifest" "wayfinder_gcp_cloudinfo_cloudaccessconfig" {
-  count = var.enable_k8s_resources && var.enable_wf_cloudaccess ? 1 : 0
+  count = var.enable_k8s_resources && var.enable_wf_cloudaccess && var.enable_wf_costestimates ? 1 : 0
 
   depends_on = [
     helm_release.wayfinder,
@@ -41,7 +39,7 @@ resource "kubectl_manifest" "wayfinder_gcp_cloudinfo_cloudaccessconfig" {
 }
 
 resource "kubectl_manifest" "wayfinder_gcp_dnszonemanager_cloudaccessconfig" {
-  count = var.enable_k8s_resources && var.enable_wf_cloudaccess ? 1 : 0
+  count = var.enable_k8s_resources && var.enable_wf_cloudaccess && var.enable_wf_dnszonemanager ? 1 : 0
 
   depends_on = [
     helm_release.wayfinder,
