@@ -1,7 +1,7 @@
 resource "google_service_account" "peeringacceptor" {
   count = var.enable_peering_acceptor ? 1 : 0
 
-  account_id   = "${local.resource_prefix}networkmgr${local.resource_suffix}"
+  account_id   = "${local.resource_prefix}peeraccpt${local.resource_suffix}"
   display_name = "Network Manager"
 }
 
