@@ -9,6 +9,7 @@ resource "google_project_iam_member" "peeringacceptor" {
   count = var.enable_peering_acceptor ? 1 : 0
 
   project = data.google_project.project.id
+  #role    = google_project_iam_custom_role.peeringacceptor[0].name
   role    = "roles/owner"
   member  = google_service_account.peeringacceptor[0].member
 }
@@ -19,6 +20,20 @@ resource "google_service_account_iam_member" "peeringacceptor" {
   service_account_id = google_service_account.peeringacceptor[0].name
   role               = "roles/iam.serviceAccountTokenCreator"
   member             = data.google_service_account.wayfinder[0].member
+}
+
+resource "google_project_iam_custom_role" "peeringacceptor" {
+  count       = var.enable_peering_acceptor ? 1 : 0
+  role_id     = "${local.resource_prefix}peeraccpt${local.resource_suffix}"
+  title       = "Peering Acceptor"
+  description = "Permissions for wayfinder to accept peering connection"
+  permissions = [
+    "dns.resourceRecordSets.list",
+    "dns.changes.create",
+    "dns.managedZones.get",
+    "dns.managedZones.create",
+    "dns.managedZones.delete",
+  ]
 }
 
 resource "google_service_account_iam_member" "peeringacceptorfederated" {
