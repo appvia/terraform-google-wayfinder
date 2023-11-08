@@ -10,7 +10,7 @@ resource "google_project_iam_member" "peeringacceptor" {
 
   project = data.google_project.project.id
   role    = google_project_iam_custom_role.peeringacceptor[0].name
-  member = google_service_account.peeringacceptor[0].member
+  member  = google_service_account.peeringacceptor[0].member
 }
 
 resource "google_service_account_iam_member" "peeringacceptor" {
