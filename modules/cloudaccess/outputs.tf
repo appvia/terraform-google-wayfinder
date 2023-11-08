@@ -13,6 +13,11 @@ output "network_manager_service_account" {
   value       = var.enable_network_manager ? google_service_account.networkmanager[0].email : null
 }
 
+output "peering_acceptor_service_account" {
+  description = "Email of Network Manager service account to use as spec.permissions[].gcpServiceAccount on the PeeringAcceptor permission of your cloud access config"
+  value       = var.enable_peering_acceptor ? google_service_account.peeringacceptor[0].email : null
+}
+
 output "cloud_info_service_account" {
   description = "Email of Cloud Info service account to use as spec.permissions[].gcpServiceAccount on the CloudInfo permission of your cloud access config"
   value       = var.enable_cloud_info ? google_service_account.cloudinfo[0].email : null
