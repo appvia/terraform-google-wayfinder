@@ -33,6 +33,24 @@ variable "enable_k8s_resources" {
   default     = true
 }
 
+variable "enable_wf_cloudaccess" {
+  description = "Whether to configure CloudIdentity and admin CloudAccessConfig resources in Wayfinder once installed (requires enable_k8s_resources)"
+  type        = bool
+  default     = true
+}
+
+variable "enable_wf_costestimates" {
+  description = "Whether to configure admin CloudAccessConfig for cost estimates in the account Wayfinder is installed in once installed (requires enable_k8s_resources and enable_wf_cloudaccess)"
+  type        = bool
+  default     = true
+}
+
+variable "enable_wf_dnszonemanager" {
+  description = "Whether to configure admin CloudAccessConfig for DNS zone management in the account Wayfinder is installed in once installed (requires enable_k8s_resources and enable_wf_cloudaccess)"
+  type        = bool
+  default     = false
+}
+
 variable "environment" {
   description = "The environment name we are provisioning."
   type        = string
@@ -139,8 +157,8 @@ variable "wayfinder_instance_id" {
   type        = string
 
   validation {
-    condition     = can(regex("^[a-z0-9]{20}$", var.wayfinder_instance_id))
-    error_message = "The Wayfinder Instance ID must be alphanumeric and 20 characters long."
+    condition     = can(regex("^[a-z0-9]{10,20}$", var.wayfinder_instance_id))
+    error_message = "The Wayfinder Instance ID must be alphanumeric and 10-20 characters long."
   }
 }
 
@@ -159,5 +177,5 @@ variable "wayfinder_release_channel" {
 variable "wayfinder_version" {
   description = "The version to use for Wayfinder."
   type        = string
-  default     = "v2.3.3"
+  default     = "v2.4.3"
 }
