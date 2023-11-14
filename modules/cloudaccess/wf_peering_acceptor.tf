@@ -31,7 +31,6 @@ resource "google_project_iam_custom_role" "peeringacceptor" {
     "compute.networks.removePeering",
     "compute.globalOperations.list",
     "compute.networks.addPeering",
-    "resourcemanager.projects.list",
     "resourcemanager.projects.get",
   ]
 }
