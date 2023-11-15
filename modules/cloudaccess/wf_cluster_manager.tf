@@ -9,9 +9,21 @@ resource "google_project_iam_member" "clustermanager" {
   count = var.enable_cluster_manager ? 1 : 0
 
   project = data.google_project.project.id
-  role    = "roles/owner"
+  role    = google_project_iam_custom_role.clustermanager[0].name
   member  = google_service_account.clustermanager[0].member
 }
+
+resource "google_project_iam_custom_role" "clustermanager" {
+  count       = var.enable_cluster_manager ? 1 : 0
+
+  role_id     = "${local.resource_prefix}clustermgr${local.resource_suffix}"
+  title       = "Cluster Manager"
+  description = "Permissions for wayfinder to manage Clusters"
+
+  permissions = [
+  ]
+}
+
 
 resource "google_service_account_iam_member" "clustermanager" {
   count = var.enable_cluster_manager && (var.from_gcp) ? 1 : 0
