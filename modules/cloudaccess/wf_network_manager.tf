@@ -38,7 +38,7 @@ resource "google_project_iam_custom_role" "networkmanager" {
     "container.clusterRoleBindings.create",
     "container.clusterRoleBindings.get",
     "container.clusterRoles.bind",
-    "container.clusterRoles.create,"
+    "container.clusterRoles.create",
     "container.clusters.create",
     "container.clusters.delete",
     "container.clusters.getCredentials",

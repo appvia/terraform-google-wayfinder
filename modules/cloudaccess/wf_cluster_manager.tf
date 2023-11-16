@@ -21,6 +21,36 @@ resource "google_project_iam_custom_role" "clustermanager" {
   description = "Permissions for wayfinder to manage Clusters"
 
   permissions = [
+    "compute.firewalls.list",
+    "container.clusterRoleBindings.create",
+    "container.clusterRoleBindings.get",
+    "container.clusterRoles.bind",
+    "container.clusterRoles.create",
+    "container.clusters.create",
+    "container.clusters.delete",
+    "container.clusters.get",
+    "container.clusters.getCredentials",
+    "container.clusters.list",
+    "container.operations.get",
+    "container.operations.list",
+    "container.podSecurityPolicies.create",
+    "container.secrets.create",
+    "container.secrets.get",
+    "container.serviceAccounts.create",
+    "container.serviceAccounts.createToken",
+    "container.serviceAccounts.get",
+    "container.services.delete",
+    "container.services.list",
+    "iam.serviceAccounts.actAs",
+    "iam.serviceAccounts.create",
+    "iam.serviceAccounts.delete",
+    "iam.serviceAccounts.get",
+    "iam.serviceAccounts.getIamPolicy",
+    "iam.serviceAccounts.list",
+    "iam.serviceAccounts.setIamPolicy",
+    "resourcemanager.projects.get",
+    "resourcemanager.projects.getIamPolicy",
+    "resourcemanager.projects.setIamPolicy",
   ]
 }
 
