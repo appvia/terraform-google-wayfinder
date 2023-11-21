@@ -24,6 +24,7 @@ resource "google_project_iam_custom_role" "dnszonemanager" {
     "dns.managedZones.delete",
     "dns.managedZones.get",
     "dns.managedZones.list",
+    "dns.managedZones.update",
     "dns.resourceRecordSets.list",
     "resourcemanager.projects.get",
   ]
