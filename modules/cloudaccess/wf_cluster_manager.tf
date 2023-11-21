@@ -31,6 +31,7 @@ resource "google_project_iam_custom_role" "clustermanager" {
     "container.clusters.get",
     "container.clusters.getCredentials",
     "container.clusters.list",
+    "container.clusters.update",
     "container.operations.get",
     "container.operations.list",
     "container.podSecurityPolicies.create",
