@@ -9,26 +9,10 @@ resource "google_project_iam_member" "dnszonemanager" {
   count = var.enable_dns_zone_manager ? 1 : 0
 
   project = data.google_project.project.id
-  role    = google_project_iam_custom_role.dnszonemanager[0].name
+  role    = "roles/dns.admin"
   member  = google_service_account.dnszonemanager[0].member
 }
 
-resource "google_project_iam_custom_role" "dnszonemanager" {
-  count       = var.enable_dns_zone_manager ? 1 : 0
-  role_id     = "${local.resource_prefix}dnszonemgr${local.resource_suffix}"
-  title       = "DNS Zone Manager"
-  description = "Permissions for wayfinder to manage DNS Zones"
-  permissions = [
-    "dns.changes.create",
-    "dns.managedZones.create",
-    "dns.managedZones.delete",
-    "dns.managedZones.get",
-    "dns.managedZones.list",
-    "dns.managedZones.update",
-    "dns.resourceRecordSets.list",
-    "resourcemanager.projects.get",
-  ]
-}
 resource "google_service_account_iam_member" "dnszonemanager" {
   count = var.enable_dns_zone_manager && (var.from_gcp) ? 1 : 0
 
