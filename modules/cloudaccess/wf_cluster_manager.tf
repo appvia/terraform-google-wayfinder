@@ -14,7 +14,7 @@ resource "google_project_iam_member" "clustermanager" {
 }
 
 resource "google_project_iam_custom_role" "clustermanager" {
-  count       = var.enable_cluster_manager ? 1 : 0
+  count = var.enable_cluster_manager ? 1 : 0
 
   role_id     = "${local.resource_prefix}clustermgr${local.resource_suffix}"
   title       = "Cluster Manager"

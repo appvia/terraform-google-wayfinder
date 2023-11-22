@@ -14,7 +14,7 @@ resource "google_project_iam_member" "networkmanager" {
 }
 
 resource "google_project_iam_custom_role" "networkmanager" {
-  count       = var.enable_network_manager ? 1 : 0
+  count = var.enable_network_manager ? 1 : 0
 
   role_id     = "${local.resource_prefix}networkmgr${local.resource_suffix}"
   title       = "Network Manager"
