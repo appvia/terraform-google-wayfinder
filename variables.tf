@@ -1,3 +1,9 @@
+variable "cloudaccess_resource_suffix" {
+  description = "The resource suffix to use for CloudAccess resources."
+  type        = string
+  default     = ""
+}
+
 variable "clusterissuer_email" {
   description = "The email address to use for the cert-manager cluster issuer."
   type        = string
