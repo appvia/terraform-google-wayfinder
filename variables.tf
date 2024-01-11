@@ -1,3 +1,9 @@
+variable "cloudaccess_resource_suffix" {
+  description = "The resource suffix to use for CloudAccess resources."
+  type        = string
+  default     = ""
+}
+
 variable "clusterissuer_email" {
   description = "The email address to use for the cert-manager cluster issuer."
   type        = string
@@ -177,5 +183,5 @@ variable "wayfinder_release_channel" {
 variable "wayfinder_version" {
   description = "The version to use for Wayfinder."
   type        = string
-  default     = "v2.4.3"
+  default     = "v2.4.5"
 }

@@ -2,7 +2,7 @@ module "wayfinder_cloudaccess" {
   count  = var.enable_wf_cloudaccess ? 1 : 0
   source = "./modules/cloudaccess"
 
-  resource_suffix                        = var.wayfinder_instance_id
+  resource_suffix                        = var.cloudaccess_resource_suffix
   wayfinder_identity_gcp_service_account = google_service_account.wayfinder.email
   enable_dns_zone_manager                = var.enable_wf_dnszonemanager
   enable_cloud_info                      = var.enable_wf_costestimates
