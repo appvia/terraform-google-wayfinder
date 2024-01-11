@@ -101,6 +101,12 @@ variable "gke_release_channel" {
   default     = "UNSPECIFIED"
 }
 
+variable "gke_version" {
+  description = "The version to use for GKE."
+  type        = string
+  default     = "1.27"
+}
+
 variable "labels" {
   description = "A map of labels to add to all resources created."
   type        = map(string)
@@ -183,5 +189,5 @@ variable "wayfinder_release_channel" {
 variable "wayfinder_version" {
   description = "The version to use for Wayfinder."
   type        = string
-  default     = "v2.4.5"
+  default     = "v2.5.1"
 }

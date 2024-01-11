@@ -8,7 +8,7 @@ resource "google_container_cluster" "gke" {
 
   initial_node_count       = 1
   location                 = var.gcp_region
-  min_master_version       = "1.26"
+  min_master_version       = var.gke_version
   network                  = var.gcp_network_name
   remove_default_node_pool = true
   resource_labels          = local.labels
