@@ -34,7 +34,7 @@ resource "kubectl_manifest" "wayfinder_gcp_cloudinfo_cloudaccessconfig" {
     name                = "gcp-cloudinfo"
     permission          = "CloudInfo"
     gcp_service_account = module.wayfinder_cloudaccess[0].cloud_info_service_account
-    type                = "CostEstimates"
+    type                = "CostsEstimates"
   })
 }
 
