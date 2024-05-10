@@ -21,6 +21,12 @@ resource "google_project_service" "compute_api" {
   service = "compute.googleapis.com"
 }
 
+resource "google_project_service" "compute_api" {
+  count   = var.enable_cluster_manager ? 1 : 0
+  project = data.google_project.project.project_id
+  service = "container.googleapis.com"
+}
+
 resource "google_project_service" "cloud_resource_manager_api" {
   project = data.google_project.project.project_id
   service = "cloudresourcemanager.googleapis.com"
