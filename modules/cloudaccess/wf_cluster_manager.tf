@@ -21,7 +21,19 @@ resource "google_project_iam_custom_role" "clustermanager" {
   description = "Permissions for wayfinder to manage Clusters"
 
   permissions = [
+    "compute.addresses.list",
+    "compute.firewalls.delete",
     "compute.firewalls.list",
+    "compute.forwardingRules.list",
+    "compute.globalOperations.list",
+    "compute.networks.create",
+    "compute.networks.delete",
+    "compute.networks.updatePolicy",
+    "compute.regionOperations.list",
+    "compute.routers.list",
+    "compute.subnetworks.create",
+    "compute.subnetworks.delete",
+    "compute.subnetworks.list",
     "container.clusterRoleBindings.create",
     "container.clusterRoleBindings.get",
     "container.clusterRoles.bind",
