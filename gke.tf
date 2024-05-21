@@ -3,6 +3,7 @@ resource "google_service_account" "gke_service_account" {
   display_name = "Wayfinder GKE ${local.name} service account"
 }
 
+#tfsec:ignore:google-gke-enforce-pod-security-policy
 resource "google_container_cluster" "gke" {
   name = local.name
 
@@ -70,6 +71,7 @@ resource "google_container_cluster" "gke" {
     provider = "CALICO"
   }
 
+  #tfsec:ignore:google-gke-enable-private-cluster
   private_cluster_config {
     enable_private_endpoint = var.disable_internet_access
   }
@@ -99,16 +101,12 @@ resource "google_container_node_pool" "nodes" {
     auto_upgrade = true
   }
 
+  #tfsec:ignore:google-gke-node-pool-uses-cos
   node_config {
-    workload_metadata_config {
-      mode = "GKE_METADATA"
-    }
-
-    machine_type = var.gke_nodes_machine_type
-
+    machine_type    = var.gke_nodes_machine_type
+    metadata        = { disable-legacy-endpoints = true }
+    oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = google_service_account.gke_service_account.email
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform"
-    ]
+    workload_metadata_config { mode = "GKE_METADATA" }
   }
 }

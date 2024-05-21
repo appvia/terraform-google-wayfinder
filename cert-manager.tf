@@ -30,7 +30,7 @@ resource "helm_release" "certmanager" {
   name        = "cert-manager"
   repository  = "https://charts.jetstack.io"
   chart       = "cert-manager"
-  version     = "v1.11.0"
+  version     = "v1.14.5"
   max_history = 5
 
   set {

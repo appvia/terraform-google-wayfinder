@@ -28,9 +28,9 @@ resource "helm_release" "external-dns" {
   create_namespace = true
 
   name        = "external-dns"
-  repository  = "https://charts.bitnami.com/bitnami"
+  repository  = "https://kubernetes-sigs.github.io/external-dns"
   chart       = "external-dns"
-  version     = "6.18.0"
+  version     = "1.14.4"
   max_history = 5
 
   set {
