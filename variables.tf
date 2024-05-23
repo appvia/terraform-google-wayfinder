@@ -104,7 +104,7 @@ variable "gke_release_channel" {
 variable "gke_version" {
   description = "The version to use for GKE."
   type        = string
-  default     = "1.28"
+  default     = "1.29"
 }
 
 variable "labels" {
@@ -189,5 +189,5 @@ variable "wayfinder_release_channel" {
 variable "wayfinder_version" {
   description = "The version to use for Wayfinder."
   type        = string
-  default     = "v2.6.4"
+  default     = "v2.7.0"
 }

@@ -31,10 +31,10 @@ The Authorized Redirect URI for the IDP Application should be set to: `https://$
 
 ```hcl
 wayfinder_idp_details = {
-  type         = "generic"
-  clientId     = "IDP-APP-CLIENT-ID"
-  clientSecret = "IDP-APP-CLIENT-SECRET"
-  serverUrl    = "https://example.okta.com" # Or "https://example.auth0.com/"
+    type         = "generic"
+    clientId     = "IDP-APP-CLIENT-ID"
+    clientSecret = "IDP-APP-CLIENT-SECRET"
+    serverUrl    = "https://example.okta.com" # Or "https://example.auth0.com/"
 }
 ```
 
@@ -42,10 +42,10 @@ wayfinder_idp_details = {
 
 ```hcl
 wayfinder_idp_details = {
-  type          = "aad"
-  clientId      = "IDP-APP-CLIENT-ID"
-  clientSecret  = "IDP-APP-CLIENT-SECRET"
-  azureTenantId = "12345678-1234-1234-1234-123456789012"
+    type          = "aad"
+    clientId      = "IDP-APP-CLIENT-ID"
+    clientSecret  = "IDP-APP-CLIENT-SECRET"
+    azureTenantId = "12345678-1234-1234-1234-123456789012"
 }
 ```
 
@@ -78,7 +78,7 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 | <a name="input_gke_nodes_machine_type"></a> [gke\_nodes\_machine\_type](#input\_gke\_nodes\_machine\_type) | The instance types to use for the GKE managed node pool. | `string` | `"e2-medium"` | no |
 | <a name="input_gke_nodes_minimum_size"></a> [gke\_nodes\_minimum\_size](#input\_gke\_nodes\_minimum\_size) | The minimum size to use for the GKE managed node pool. | `number` | `2` | no |
 | <a name="input_gke_release_channel"></a> [gke\_release\_channel](#input\_gke\_release\_channel) | The release channel to use for GKE. | `string` | `"UNSPECIFIED"` | no |
-| <a name="input_gke_version"></a> [gke\_version](#input\_gke\_version) | The version to use for GKE. | `string` | `"1.28"` | no |
+| <a name="input_gke_version"></a> [gke\_version](#input\_gke\_version) | The version to use for GKE. | `string` | `"1.29"` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | A map of labels to add to all resources created. | `map(string)` | `{}` | no |
 | <a name="input_pods_subnetwork_range_name"></a> [pods\_subnetwork\_range\_name](#input\_pods\_subnetwork\_range\_name) | The name of the existing secondary range in the cluster's subnetwork to use for pod IP addresses. | `string` | n/a | yes |
 | <a name="input_services_subnetwork_range_name"></a> [services\_subnetwork\_range\_name](#input\_services\_subnetwork\_range\_name) | The name of the existing secondary range in the cluster's subnetwork to use for services IP addresses. | `string` | n/a | yes |
@@ -88,7 +88,7 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 | <a name="input_wayfinder_instance_id"></a> [wayfinder\_instance\_id](#input\_wayfinder\_instance\_id) | The instance ID to use for Wayfinder. | `string` | n/a | yes |
 | <a name="input_wayfinder_licence_key"></a> [wayfinder\_licence\_key](#input\_wayfinder\_licence\_key) | The licence key to use for Wayfinder. | `string` | n/a | yes |
 | <a name="input_wayfinder_release_channel"></a> [wayfinder\_release\_channel](#input\_wayfinder\_release\_channel) | The release channel to use for Wayfinder. | `string` | `"wayfinder-releases"` | no |
-| <a name="input_wayfinder_version"></a> [wayfinder\_version](#input\_wayfinder\_version) | The version to use for Wayfinder. | `string` | `"v2.6.4"` | no |
+| <a name="input_wayfinder_version"></a> [wayfinder\_version](#input\_wayfinder\_version) | The version to use for Wayfinder. | `string` | `"v2.7.0"` | no |
 
 ## Outputs
 
