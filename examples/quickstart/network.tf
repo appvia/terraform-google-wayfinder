@@ -8,9 +8,10 @@ module "network" {
   subnets = [
     {
       subnet_name           = "compute"
+      subnet_flow_logs      = "true"
       subnet_ip             = "10.10.0.0/19"
-      subnet_region         = var.gcp_region
       subnet_private_access = true
+      subnet_region         = var.gcp_region
     }
   ]
 
@@ -27,4 +28,6 @@ module "network" {
       },
     ]
   }
+
+
 }
