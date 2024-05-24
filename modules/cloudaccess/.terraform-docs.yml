@@ -1,0 +1,23 @@
+content: |-
+  # Terraform Module: Cloud Access for Wayfinder on GCP
+
+  This Terraform Module can be used to provision Service Accounts that Wayfinder uses, for creating resources within a Google Project.
+
+  **Notes:**
+  * You must set `var.wayfinder_identity_gcp_service_account` to the email address of the GCP service account that Wayfinder uses.
+  * `var.resource_suffix` is an optional suffix to use on created objects. We recommend using workspace key + stage if you wish to have multiple workspaces sharing the same AWS account, allowing independent roles to be provisioned for each.
+
+  ## Deployment
+
+  Please see the [examples](./examples) directory to see how to deploy this module.
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+  ## Updating Docs
+
+  The `terraform-docs` utility is used to generate this README. Follow the below steps to update:
+  1. Make changes to the `.terraform-docs.yml` file
+  2. Fetch the `terraform-docs` binary (https://terraform-docs.io/user-guide/installation/)
+  3. Run `terraform-docs markdown table --output-file ${PWD}/README.md --output-mode inject .`
