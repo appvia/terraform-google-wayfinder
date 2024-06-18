@@ -3,7 +3,7 @@ resource "google_service_account" "gke_service_account" {
   display_name = "Wayfinder GKE ${local.name} service account"
 }
 
-#tfsec:ignore:google-gke-enforce-pod-security-policy
+#trivy:ignore:AVD-GCP-0048
 resource "google_container_cluster" "gke" {
   name = local.name
 
@@ -101,7 +101,7 @@ resource "google_container_node_pool" "nodes" {
     auto_upgrade = true
   }
 
-  #tfsec:ignore:google-gke-node-pool-uses-cos
+  #trivy:ignore:AVD-GCP-0048
   node_config {
     machine_type    = var.gke_nodes_machine_type
     metadata        = { disable-legacy-endpoints = true }

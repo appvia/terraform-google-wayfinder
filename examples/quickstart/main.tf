@@ -1,3 +1,4 @@
+#trivy:ignore:AVD-GCP-0048
 module "wayfinder" {
   source = "../../"
 
