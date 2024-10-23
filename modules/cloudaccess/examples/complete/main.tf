@@ -1,5 +1,5 @@
 module "wayfinder_cloudaccess" {
-  source = "github.com/appvia/terraform-google-wayfinder//modules/cloudaccess"
+  source = "../../"
 
   resource_suffix = var.resource_suffix
 
