@@ -1,4 +1,3 @@
-<!-- BEGIN_TF_DOCS -->
 # Example: Quickstart
 
 **Notes:**
@@ -22,20 +21,25 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 2. Fetch the `terraform-docs` binary (https://terraform-docs.io/user-guide/installation/)
 3. Run `terraform-docs markdown table --output-file ${PWD}/README.md --output-mode inject .`
 
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+No providers.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_clusterissuer_email"></a> [clusterissuer\_email](#input\_clusterissuer\_email) | The email address to use for the cert-manager cluster issuer. | `string` | n/a | yes |
-| <a name="input_disable_internet_access"></a> [disable\_internet\_access](#input\_disable\_internet\_access) | Whether to disable internet access for EKS and the Wayfinder ingress controller. | `bool` | `false` | no |
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment name we are provisioning. | `string` | `"production"` | no |
 | <a name="input_gcp_project"></a> [gcp\_project](#input\_gcp\_project) | Google Cloud Platform Project ID. | `string` | n/a | yes |
-| <a name="input_gcp_region"></a> [gcp\_region](#input\_gcp\_region) | Google Cloud region. | `string` | `"europe-west2"` | no |
-| <a name="input_labels"></a> [labels](#input\_labels) | A map of labels to add to all resources created. | `map(string)` | `{}` | no |
 | <a name="input_wayfinder_domain_name_api"></a> [wayfinder\_domain\_name\_api](#input\_wayfinder\_domain\_name\_api) | The local DNS host to use for Wayfinder API. | `string` | n/a | yes |
 | <a name="input_wayfinder_domain_name_ui"></a> [wayfinder\_domain\_name\_ui](#input\_wayfinder\_domain\_name\_ui) | The local DNS host to use for Wayfinder Portal. | `string` | n/a | yes |
 | <a name="input_wayfinder_instance_id"></a> [wayfinder\_instance\_id](#input\_wayfinder\_instance\_id) | The instance ID to use for Wayfinder. | `string` | n/a | yes |
 | <a name="input_wayfinder_licence_key"></a> [wayfinder\_licence\_key](#input\_wayfinder\_licence\_key) | The licence key to use for Wayfinder. | `string` | n/a | yes |
+| <a name="input_disable_internet_access"></a> [disable\_internet\_access](#input\_disable\_internet\_access) | Whether to disable internet access for EKS and the Wayfinder ingress controller. | `bool` | `false` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name we are provisioning. | `string` | `"production"` | no |
+| <a name="input_gcp_region"></a> [gcp\_region](#input\_gcp\_region) | Google Cloud region. | `string` | `"europe-west2"` | no |
+| <a name="input_labels"></a> [labels](#input\_labels) | A map of labels to add to all resources created. | `map(string)` | `{}` | no |
 
 ## Outputs
 
@@ -47,3 +51,4 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 | <a name="output_wayfinder_instance_id"></a> [wayfinder\_instance\_id](#output\_wayfinder\_instance\_id) | The unique identifier for the Wayfinder instance |
 | <a name="output_wayfinder_ui_url"></a> [wayfinder\_ui\_url](#output\_wayfinder\_ui\_url) | The URL for the Wayfinder UI |
 <!-- END_TF_DOCS -->
+
