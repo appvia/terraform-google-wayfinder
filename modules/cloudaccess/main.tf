@@ -16,23 +16,27 @@ data "google_service_account" "wayfinder" {
 }
 
 resource "google_project_service" "compute_api" {
-  count   = var.enable_cluster_manager ? 1 : 0
-  project = data.google_project.project.project_id
-  service = "compute.googleapis.com"
+  count              = var.enable_cluster_manager ? 1 : 0
+  disable_on_destroy = false
+  project            = data.google_project.project.project_id
+  service            = "compute.googleapis.com"
 }
 
 resource "google_project_service" "container_api" {
-  count   = var.enable_cluster_manager ? 1 : 0
-  project = data.google_project.project.project_id
-  service = "container.googleapis.com"
+  count              = var.enable_cluster_manager ? 1 : 0
+  disable_on_destroy = false
+  project            = data.google_project.project.project_id
+  service            = "container.googleapis.com"
 }
 
 resource "google_project_service" "cloud_resource_manager_api" {
-  project = data.google_project.project.project_id
-  service = "cloudresourcemanager.googleapis.com"
+  disable_on_destroy = false
+  project            = data.google_project.project.project_id
+  service            = "cloudresourcemanager.googleapis.com"
 }
 
 resource "google_project_service" "iam_credentials_api" {
-  project = data.google_project.project.project_id
-  service = "iamcredentials.googleapis.com"
+  disable_on_destroy = false
+  project            = data.google_project.project.project_id
+  service            = "iamcredentials.googleapis.com"
 }
