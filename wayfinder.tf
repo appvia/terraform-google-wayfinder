@@ -104,7 +104,7 @@ resource "helm_release" "wayfinder" {
   depends_on = [
     google_container_cluster.gke,
     helm_release.certmanager,
-    helm_release.external-dns,
+    helm_release.external_dns,
     helm_release.ingress,
     kubectl_manifest.certmanager_clusterissuer,
     kubectl_manifest.storageclass_encrypted,
@@ -128,6 +128,7 @@ resource "helm_release" "wayfinder" {
       api_hostname                  = var.wayfinder_domain_name_api
       disable_local_login           = var.wayfinder_idp_details["type"] == "none" ? false : var.disable_local_login
       enable_localadmin_user        = var.create_localadmin_user
+      no_defaults                   = var.wayfinder_no_defaults
       storage_class                 = "standard-rwo-encrypted"
       ui_hostname                   = var.wayfinder_domain_name_ui
       wayfinder_iam_identity        = google_service_account.wayfinder.email

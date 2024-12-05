@@ -1,15 +1,22 @@
-<!-- BEGIN_TF_DOCS -->
 # Terraform Module: Cloud Access for Wayfinder on GCP
 
 This Terraform Module can be used to provision Service Accounts that Wayfinder uses, for creating resources within a Google Project.
 
 **Notes:**
-* You must set `var.wayfinder_identity_gcp_service_account` to the email address of the GCP service account that Wayfinder uses.
-* `var.resource_suffix` is an optional suffix to use on created objects. We recommend using workspace key + stage if you wish to have multiple workspaces sharing the same AWS account, allowing independent roles to be provisioned for each.
+
+- You must set `var.wayfinder_identity_gcp_service_account` to the email address of the GCP service account that Wayfinder uses.
+- `var.resource_suffix` is an optional suffix to use on created objects. We recommend using workspace key + stage if you wish to have multiple workspaces sharing the same AWS account, allowing independent roles to be provisioned for each.
 
 ## Deployment
 
 Please see the [examples](./examples) directory to see how to deploy this module.
+
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_google"></a> [google](#provider\_google) | >=4.84.0 |
 
 ## Inputs
 
@@ -43,11 +50,5 @@ Please see the [examples](./examples) directory to see how to deploy this module
 | <a name="output_gcp_workload_identity_provider_id_azure"></a> [gcp\_workload\_identity\_provider\_id\_azure](#output\_gcp\_workload\_identity\_provider\_id\_azure) | ID of GCP Workload Identity Provider to use as spec.gcp.workloadIdentityProviderID of your cloud access config when enabling cross-cloud access to GCP from Azure |
 | <a name="output_network_manager_service_account"></a> [network\_manager\_service\_account](#output\_network\_manager\_service\_account) | Email of Network Manager service account to use as spec.permissions[].gcpServiceAccount on the NetworkManager permission of your cloud access config |
 | <a name="output_peering_acceptor_service_account"></a> [peering\_acceptor\_service\_account](#output\_peering\_acceptor\_service\_account) | Email of Network Manager service account to use as spec.permissions[].gcpServiceAccount on the PeeringAcceptor permission of your cloud access config |
-
-## Updating Docs
-
-The `terraform-docs` utility is used to generate this README. Follow the below steps to update:
-1. Make changes to the `.terraform-docs.yml` file
-2. Fetch the `terraform-docs` binary (https://terraform-docs.io/user-guide/installation/)
-3. Run `terraform-docs markdown table --output-file ${PWD}/README.md --output-mode inject .`
 <!-- END_TF_DOCS -->
+

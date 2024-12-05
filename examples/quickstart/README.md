@@ -1,4 +1,3 @@
-<!-- BEGIN_TF_DOCS -->
 # Example: Quickstart
 
 **Notes:**
@@ -21,6 +20,33 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 1. Make changes to the `.terraform-docs.yml` file
 2. Fetch the `terraform-docs` binary (https://terraform-docs.io/user-guide/installation/)
 3. Run `terraform-docs markdown table --output-file ${PWD}/README.md --output-mode inject .`
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.82 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.9.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | ~> 2.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.23.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.5 |
+
+## Providers
+
+No providers.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_network"></a> [network](#module\_network) | terraform-google-modules/network/google | 7.3.0 |
+| <a name="module_wayfinder"></a> [wayfinder](#module\_wayfinder) | ../../ | n/a |
+
+## Resources
+
+No resources.
 
 ## Inputs
 
@@ -47,3 +73,4 @@ The `terraform-docs` utility is used to generate this README. Follow the below s
 | <a name="output_wayfinder_instance_id"></a> [wayfinder\_instance\_id](#output\_wayfinder\_instance\_id) | The unique identifier for the Wayfinder instance |
 | <a name="output_wayfinder_ui_url"></a> [wayfinder\_ui\_url](#output\_wayfinder\_ui\_url) | The URL for the Wayfinder UI |
 <!-- END_TF_DOCS -->
+

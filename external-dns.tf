@@ -17,7 +17,7 @@ resource "google_project_iam_member" "external_dns" {
   member  = "serviceAccount:${google_service_account.external_dns.email}"
 }
 
-resource "helm_release" "external-dns" {
+resource "helm_release" "external_dns" {
   count = var.enable_k8s_resources ? 1 : 0
 
   depends_on = [
@@ -30,7 +30,7 @@ resource "helm_release" "external-dns" {
   name        = "external-dns"
   repository  = "https://kubernetes-sigs.github.io/external-dns"
   chart       = "external-dns"
-  version     = "1.14.4"
+  version     = "1.15.0"
   max_history = 5
 
   set {
