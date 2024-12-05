@@ -5,6 +5,9 @@
 *.tfstate
 *.tfstate.*
 
+# tf lock files
+*.lock.hcl
+
 # Crash log files
 crash.log
 crash.*.log
@@ -31,3 +34,6 @@ terraform.rc
 
 # Other
 .DS_Store
+
+# Meld
+*.orig
