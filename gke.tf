@@ -103,7 +103,18 @@ resource "google_container_node_pool" "nodes" {
 
   #trivy:ignore:AVD-GCP-0048
   node_config {
-    machine_type    = var.gke_nodes_machine_type
+    machine_type = var.gke_nodes_machine_type
+
+    resource_labels = {
+      "goog-gke-node-pool-provisioning-model" = "on-demand"
+    }
+
+    kubelet_config {
+      cpu_cfs_quota      = false
+      pod_pids_limit     = 0
+      cpu_manager_policy = ""
+    }
+
     metadata        = { disable-legacy-endpoints = true }
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = google_service_account.gke_service_account.email
