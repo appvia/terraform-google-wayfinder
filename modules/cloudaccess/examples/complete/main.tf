@@ -1,6 +1,5 @@
 module "wayfinder_cloudaccess" {
-  # Will update to use full path so it works from init command in follow up PR
-  source = "../../"
+  source = "github.com/appvia/terraform-google-wayfinder//modules/cloudaccess?ref=v3"
 
   resource_suffix = var.resource_suffix
 
