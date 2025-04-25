@@ -6,7 +6,7 @@ resource "google_service_account" "cloudresourcesprov" {
 }
 
 resource "google_service_account_iam_member" "cloudresourcesprov" {
-  count = var.enable_cloud_info && (var.from_gcp) ? 1 : 0
+  count = var.enable_cloud_resource_provisioning && (var.from_gcp) ? 1 : 0
 
   service_account_id = google_service_account.cloudresourcesprov[0].name
   role               = "roles/iam.serviceAccountTokenCreator"
