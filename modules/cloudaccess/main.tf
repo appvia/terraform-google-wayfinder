@@ -5,6 +5,20 @@ locals {
   # populate the account ID and role name if from the irsa role arn using split
   aws_account_id = var.from_aws ? split(":", var.wayfinder_identity_aws_role_arn)[4] : ""
   aws_role_name  = var.from_aws ? split("role/", var.wayfinder_identity_aws_role_arn)[1] : ""
+
+  # Service account IDs (limit to 29 chars, no hyphens)
+  clustermgr_sa_id         = substr(replace(lower("${local.resource_prefix}clustermgr${local.resource_suffix}"), "-", ""), 0, 29)
+  dnszonemgr_sa_id         = substr(replace(lower("${local.resource_prefix}dnszonemgr${local.resource_suffix}"), "-", ""), 0, 29)
+  networkmgr_sa_id         = substr(replace(lower("${local.resource_prefix}networkmgr${local.resource_suffix}"), "-", ""), 0, 29)
+  cloudresourcesprov_sa_id = substr(replace(lower("${local.resource_prefix}cloudresourcesprov${local.resource_suffix}"), "-", ""), 0, 29)
+  peeraccpt_sa_id          = substr(replace(lower("${local.resource_prefix}peeraccpt${local.resource_suffix}"), "-", ""), 0, 29)
+  cloudinfo_sa_id          = substr(replace(lower("${local.resource_prefix}cloudinfo${local.resource_suffix}"), "-", ""), 0, 29)
+
+  # Role IDs (limit to 63 chars, no hyphens)
+  clustermgr_role_id = substr(replace(lower("${local.resource_prefix}clustermgr${local.resource_suffix}"), "-", ""), 0, 63)
+  networkmgr_role_id = substr(replace(lower("${local.resource_prefix}networkmgr${local.resource_suffix}"), "-", ""), 0, 63)
+  peeraccpt_role_id  = substr(replace(lower("${local.resource_prefix}peeraccpt${local.resource_suffix}"), "-", ""), 0, 63)
+  cloudinfo_role_id  = substr(replace(lower("${local.resource_prefix}cloudinfo${local.resource_suffix}"), "-", ""), 0, 63)
 }
 
 data "google_project" "project" {}

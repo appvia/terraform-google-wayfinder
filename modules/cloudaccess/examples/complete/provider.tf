@@ -1,3 +1,3 @@
 provider "google" {
-  project = "wayfinder-example"
+  project = var.gcp_project
 }

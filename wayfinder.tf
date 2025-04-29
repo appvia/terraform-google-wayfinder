@@ -1,5 +1,5 @@
 resource "google_service_account" "wayfinder" {
-  account_id   = "wf-admin-${local.service_account_suffix}"
+  account_id   = local.wayfinder_admin_sa_id
   display_name = "Wayfinder admin service account"
 }
 

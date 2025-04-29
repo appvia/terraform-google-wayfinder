@@ -1,7 +1,7 @@
 resource "google_service_account" "cloudinfo" {
   count = var.enable_cloud_info ? 1 : 0
 
-  account_id   = "${local.resource_prefix}cloudinfo${local.resource_suffix}"
+  account_id   = local.cloudinfo_sa_id
   display_name = "Cloud Info metadata"
 }
 
@@ -15,7 +15,7 @@ resource "google_project_iam_member" "cloudinfo" {
 
 resource "google_project_iam_custom_role" "cloudinfo" {
   count       = var.enable_cloud_info ? 1 : 0
-  role_id     = "${local.resource_prefix}cloudinfo${local.resource_suffix}"
+  role_id     = local.cloudinfo_role_id
   title       = "Cloud Info"
   description = "Permissions for wayfinder to retrieve pricing and instance type metadata"
   permissions = [

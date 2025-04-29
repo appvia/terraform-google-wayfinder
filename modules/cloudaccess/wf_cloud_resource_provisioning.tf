@@ -1,7 +1,7 @@
 resource "google_service_account" "cloudresourcesprov" {
   count = var.enable_cloud_resource_provisioning ? 1 : 0
 
-  account_id   = "${local.resource_prefix}cloudresourcesprov${local.resource_suffix}"
+  account_id   = local.cloudresourcesprov_sa_id
   display_name = "Cloud Resource Provisioning"
 }
 
