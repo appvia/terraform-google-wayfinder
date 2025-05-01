@@ -1,7 +1,7 @@
 resource "google_service_account" "peeringacceptor" {
   count = var.enable_peering_acceptor ? 1 : 0
 
-  account_id   = "${local.resource_prefix}peeraccpt${local.resource_suffix}"
+  account_id   = local.peeraccpt_sa_id
   display_name = "Peering Acceptor"
 }
 
@@ -23,7 +23,7 @@ resource "google_service_account_iam_member" "peeringacceptor" {
 
 resource "google_project_iam_custom_role" "peeringacceptor" {
   count       = var.enable_peering_acceptor ? 1 : 0
-  role_id     = "${local.resource_prefix}peeraccpt${local.resource_suffix}"
+  role_id     = local.peeraccpt_role_id
   title       = "Peering Acceptor"
   description = "Permissions for wayfinder to accept peering connection"
   permissions = [

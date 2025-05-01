@@ -22,6 +22,11 @@ variable "resource_suffix" {
   type        = string
 }
 
+variable "gcp_project" {
+  description = "The GCP project to provision service accounts and related IAM objects"
+  type        = string
+}
+
 variable "wayfinder_identity_gcp_service_account" {
   default     = ""
   description = "Email address of Wayfinder's GCP service account to give access to. Populate when Wayfinder is running on GCP with Workload Identity."

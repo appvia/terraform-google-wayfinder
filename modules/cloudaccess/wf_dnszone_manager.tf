@@ -1,7 +1,7 @@
 resource "google_service_account" "dnszonemanager" {
   count = var.enable_dns_zone_manager ? 1 : 0
 
-  account_id   = "${local.resource_prefix}dnszonemgr${local.resource_suffix}"
+  account_id   = local.dnszonemgr_sa_id
   display_name = "DNS Zone Manager"
 }
 

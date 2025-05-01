@@ -1,7 +1,7 @@
 resource "google_service_account" "clustermanager" {
   count = var.enable_cluster_manager ? 1 : 0
 
-  account_id   = "${local.resource_prefix}clustermgr${local.resource_suffix}"
+  account_id   = local.clustermgr_sa_id
   display_name = "Cluster Manager"
 }
 
@@ -13,10 +13,19 @@ resource "google_project_iam_member" "clustermanager" {
   member  = google_service_account.clustermanager[0].member
 }
 
+# Add the Kubernetes Engine Admin predefined role
+resource "google_project_iam_member" "clustermanager_k8s_admin" {
+  count = var.enable_cluster_manager ? 1 : 0
+
+  project = data.google_project.project.id
+  role    = "roles/container.admin"
+  member  = google_service_account.clustermanager[0].member
+}
+
 resource "google_project_iam_custom_role" "clustermanager" {
   count = var.enable_cluster_manager ? 1 : 0
 
-  role_id     = "${local.resource_prefix}clustermgr${local.resource_suffix}"
+  role_id     = local.clustermgr_role_id
   title       = "Cluster Manager"
   description = "Permissions for wayfinder to manage Clusters"
 

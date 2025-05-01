@@ -7,6 +7,7 @@ No providers.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_project"></a> [project](#input\_project) | the project to provision service accounts and related IAM objects | `string` | n/a | yes |
 | <a name="input_enable_cloud_info"></a> [enable\_cloud\_info](#input\_enable\_cloud\_info) | Whether to create the Cloud Info service account | `bool` | `false` | no |
 | <a name="input_enable_cloud_resource_provisioning"></a> [enable\_cloud\_resource\_provisioning](#input\_enable\_cloud\_resource\_provisioning) | Whether to create the Cloud Resource Provisioning service account | `bool` | `true` | no |
 | <a name="input_enable_cluster_manager"></a> [enable\_cluster\_manager](#input\_enable\_cluster\_manager) | Whether to create the Cluster Manager service account | `bool` | `true` | no |

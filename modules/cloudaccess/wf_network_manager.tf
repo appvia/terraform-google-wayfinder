@@ -1,7 +1,7 @@
 resource "google_service_account" "networkmanager" {
   count = var.enable_network_manager ? 1 : 0
 
-  account_id   = "${local.resource_prefix}networkmgr${local.resource_suffix}"
+  account_id   = local.networkmgr_sa_id
   display_name = "Network Manager"
 }
 
@@ -16,7 +16,7 @@ resource "google_project_iam_member" "networkmanager" {
 resource "google_project_iam_custom_role" "networkmanager" {
   count = var.enable_network_manager ? 1 : 0
 
-  role_id     = "${local.resource_prefix}networkmgr${local.resource_suffix}"
+  role_id     = local.networkmgr_role_id
   title       = "Network Manager"
   description = "Permissions for wayfinder to manage Networks"
 
