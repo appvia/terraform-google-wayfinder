@@ -1,31 +1,6 @@
-output "cluster_manager_service_account" {
+output "service_account" {
   description = "Email of Cluster Manager service account to use as spec.permissions[].gcpServiceAccount on the ClusterManager permission of your cloud access config"
-  value       = var.enable_cluster_manager ? google_service_account.clustermanager[0].email : null
-}
-
-output "dns_zone_manager_service_account" {
-  description = "Email of DNS Zone Manager service account to use as spec.permissions[].gcpServiceAccount on the DNSZoneManager permission of your cloud access config"
-  value       = var.enable_dns_zone_manager ? google_service_account.dnszonemanager[0].email : null
-}
-
-output "network_manager_service_account" {
-  description = "Email of Network Manager service account to use as spec.permissions[].gcpServiceAccount on the NetworkManager permission of your cloud access config"
-  value       = var.enable_network_manager ? google_service_account.networkmanager[0].email : null
-}
-
-output "cloud_resource_provisioning_service_account" {
-  description = "Email of Cloud Resource Provisioning service account to use as spec.permissions[].gcpServiceAccount on the CloudResourceProvisioning permission of your cloud access config"
-  value       = var.enable_cloud_resource_provisioning ? google_service_account.cloudresourcesprov[0].email : null
-}
-
-output "peering_acceptor_service_account" {
-  description = "Email of Network Manager service account to use as spec.permissions[].gcpServiceAccount on the PeeringAcceptor permission of your cloud access config"
-  value       = var.enable_peering_acceptor ? google_service_account.peeringacceptor[0].email : null
-}
-
-output "cloud_info_service_account" {
-  description = "Email of Cloud Info service account to use as spec.permissions[].gcpServiceAccount on the CloudInfo permission of your cloud access config"
-  value       = var.enable_cloud_info ? google_service_account.cloudinfo[0].email : null
+  value       = google_service_account.wayfinder.email
 }
 
 output "gcp_projectnumber" {

@@ -1,8 +1,12 @@
 # Resource suffix is optional, specify this if you need to keep role definitions unique amongst
 # multiple workspaces using the same GCP Project.
-resource_suffix                           = ""
-enable_cluster_manager                    = true
-enable_dns_zone_manager                   = true
-enable_network_manager                    = true
-enable_cloud_info                         = false
-wayfinder_identity_gcp_service_account    = "wf-management@wayfinder-host-project.iam.gserviceaccount.com"
+resource_suffix                                = ""
+enable_cluster_manager_permissions             = true
+enable_dns_zone_manager_permissions            = true
+enable_network_manager_permissions             = true
+enable_cloud_info_permissions                  = false
+wayfinder_identity_gcp_service_account         = "wf-management@wayfinder-host-project.iam.gserviceaccount.com"
+
+# Optional: Add custom roles and permissions
+custom_role_ids    = ["projects/your-project/roles/customRole1", "projects/your-project/roles/customRole2"]
+custom_permissions = ["compute.instances.list", "storage.buckets.get"]

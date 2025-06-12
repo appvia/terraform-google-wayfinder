@@ -51,38 +51,44 @@ variable "wayfinder_identity_aws_role_arn" {
   type        = string
 }
 
-variable "enable_cluster_manager" {
+variable "enable_cluster_manager_permissions" {
   default     = true
-  description = "Whether to create the Cluster Manager service account"
+  description = "Whether to grant Cluster Manager permissions to the service account"
   type        = bool
 }
 
-variable "enable_dns_zone_manager" {
+variable "enable_dns_zone_manager_permissions" {
   default     = true
-  description = "Whether to create the DNS Zone Manager service account"
+  description = "Whether to grant DNS Zone Manager permissions to the service account"
   type        = bool
 }
 
-variable "enable_network_manager" {
+variable "enable_network_manager_permissions" {
   default     = true
-  description = "Whether to create the Network Manager service account"
+  description = "Whether to grant Network Manager permissions to the service account"
   type        = bool
 }
 
-variable "enable_cloud_resource_provisioning" {
-  default     = true
-  description = "Whether to create the Cloud Resource Provisioning service account"
-  type        = bool
-}
-
-variable "enable_peering_acceptor" {
+variable "enable_peering_acceptor_permissions" {
   default     = false
-  description = "Whether to create the Peering Acceptor service account"
+  description = "Whether to grant Peering Acceptor permissions to the service account"
   type        = bool
 }
 
-variable "enable_cloud_info" {
+variable "enable_cloud_info_permissions" {
   default     = false
-  description = "Whether to create the Cloud Info service account"
+  description = "Whether to grant Cloud Info permissions to the service account"
   type        = bool
+}
+
+variable "custom_role_ids" {
+  default     = []
+  description = "List of custom roles to bind to the service account"
+  type        = list(string)
+}
+
+variable "custom_permissions" {
+  default     = []
+  description = "List of permissions to add to the service account"
+  type        = list(string)
 }
