@@ -7,13 +7,14 @@ No providers.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_project"></a> [project](#input\_project) | the project to provision service accounts and related IAM objects | `string` | n/a | yes |
-| <a name="input_enable_cloud_info"></a> [enable\_cloud\_info](#input\_enable\_cloud\_info) | Whether to create the Cloud Info service account | `bool` | `false` | no |
-| <a name="input_enable_cloud_resource_provisioning"></a> [enable\_cloud\_resource\_provisioning](#input\_enable\_cloud\_resource\_provisioning) | Whether to create the Cloud Resource Provisioning service account | `bool` | `true` | no |
-| <a name="input_enable_cluster_manager"></a> [enable\_cluster\_manager](#input\_enable\_cluster\_manager) | Whether to create the Cluster Manager service account | `bool` | `true` | no |
-| <a name="input_enable_dns_zone_manager"></a> [enable\_dns\_zone\_manager](#input\_enable\_dns\_zone\_manager) | Whether to create the DNS Zone Manager service account | `bool` | `true` | no |
-| <a name="input_enable_network_manager"></a> [enable\_network\_manager](#input\_enable\_network\_manager) | Whether to create the Network Manager service account | `bool` | `true` | no |
-| <a name="input_enable_peering_acceptor"></a> [enable\_peering\_acceptor](#input\_enable\_peering\_acceptor) | Whether to create the Peering Acceptor service account | `bool` | `false` | no |
+| <a name="input_gcp_project"></a> [gcp\_project](#input\_gcp\_project) | The GCP project to provision service accounts and related IAM objects | `string` | n/a | yes |
+| <a name="input_custom_permissions"></a> [custom\_permissions](#input\_custom\_permissions) | List of permissions to add to the service account | `list(string)` | `[]` | no |
+| <a name="input_custom_role_ids"></a> [custom\_role\_ids](#input\_custom\_role\_ids) | List of custom roles to bind to the service account | `list(string)` | `[]` | no |
+| <a name="input_enable_cloud_info_permissions"></a> [enable\_cloud\_info\_permissions](#input\_enable\_cloud\_info\_permissions) | Whether to grant Cloud Info permissions to the service account | `bool` | `false` | no |
+| <a name="input_enable_cluster_manager_permissions"></a> [enable\_cluster\_manager\_permissions](#input\_enable\_cluster\_manager\_permissions) | Whether to grant Cluster Manager permissions to the service account | `bool` | `true` | no |
+| <a name="input_enable_dns_zone_manager_permissions"></a> [enable\_dns\_zone\_manager\_permissions](#input\_enable\_dns\_zone\_manager\_permissions) | Whether to grant DNS Zone Manager permissions to the service account | `bool` | `true` | no |
+| <a name="input_enable_network_manager_permissions"></a> [enable\_network\_manager\_permissions](#input\_enable\_network\_manager\_permissions) | Whether to grant Network Manager permissions to the service account | `bool` | `true` | no |
+| <a name="input_enable_peering_acceptor_permissions"></a> [enable\_peering\_acceptor\_permissions](#input\_enable\_peering\_acceptor\_permissions) | Whether to grant Peering Acceptor permissions to the service account | `bool` | `false` | no |
 | <a name="input_from_aws"></a> [from\_aws](#input\_from\_aws) | Whether Wayfinder is running on AWS. | `bool` | `false` | no |
 | <a name="input_from_azure"></a> [from\_azure](#input\_from\_azure) | Whether Wayfinder is running on Azure. | `bool` | `true` | no |
 | <a name="input_from_gcp"></a> [from\_gcp](#input\_from\_gcp) | Whether Wayfinder is running on GCP. | `bool` | `false` | no |

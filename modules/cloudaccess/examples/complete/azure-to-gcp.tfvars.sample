@@ -1,11 +1,15 @@
 # Resource suffix is optional, specify this if you need to keep role definitions unique amongst
 # multiple workspaces using the same GCP Project.
-resource_suffix                           = ""
-enable_cluster_manager                    = true
-enable_dns_zone_manager                   = true
-enable_network_manager                    = true
-enable_cloud_info                         = false
-from_azure                                = true
-from_gcp                                  = false
-wayfinder_identity_azure_client_id        = "87654321-dcba-10fe-abcd-012345678901"
-wayfinder_identity_azure_tenant_id        = "12345678-abcd-ef01-dcba-012345678901"
+resource_suffix                                = ""
+enable_cluster_manager_permissions             = true
+enable_dns_zone_manager_permissions            = true
+enable_network_manager_permissions             = true
+enable_cloud_info_permissions                  = false
+from_azure                                     = true
+from_gcp                                       = false
+wayfinder_identity_azure_client_id             = "87654321-dcba-10fe-abcd-012345678901"
+wayfinder_identity_azure_tenant_id             = "12345678-abcd-ef01-dcba-012345678901"
+
+# Optional: Add custom roles and permissions
+custom_role_ids    = ["projects/your-project/roles/customRole1", "projects/your-project/roles/customRole2"]
+custom_permissions = ["compute.instances.list", "storage.buckets.get"]
